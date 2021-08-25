@@ -1,0 +1,43 @@
+doctype html
+html
+  body
+    h1= title
+    h3#status not connected 
+    br  
+    p#update update:&nbsp
+    button(onclick='handSendMsg("spin")') Send spin
+    button(onclick='handSendMsg("wild")') Send wild
+    button(onclick='handSendMsg("blast")') Send blast
+
+    script(src="/socket.io/socket.io.js")
+    script.
+      var socket = io();
+      function isValidMsgType(type){
+          return ['spin','wild','blast'].includes(type);
+      }
+      async function sendMsg(type){
+        let url = `http://localhost:3000/api/chats/${type}`;
+        const options = {method: 'POST'}
+        if(type === 'wild'){
+          options.body = {pickRandomSize: 2}
+        }
+        await fetch(url,options)
+      }
+      async function handSendMsg(type) {
+          const isValid = isValidMsgType(type);
+          isValid ? await sendMsg(type) : alert('Invalid msg type.');
+      }
+      socket.on('connect', function() {
+        document.getElementById("status").innerHTML = "connected";   
+        socket.emit('message', 'Hello!');
+      });
+      socket.on('update', function (data) {
+          document.getElementById("update").innerHTML += data;  
+      });
+      socket.on('socketToMe', function (data) {
+          alert(data)  
+      });
+
+
+
+

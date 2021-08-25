@@ -1,0 +1,33 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+.login-container{
+  width: 325px;
+}
+.label-container{
+  display: flex;
+  justify-content: space-around;
+  width: 300px;
+}
+.label-text{
+  width:100px;
+}
+.btn-container{
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  margin-top: 10px;
+}
+.login-sign-in-btn{
+  width:150px;
+}
+.login-sign-up-btn{
+  width:150px;
+  margin-top: 40px;
+  margin-left: 88px;
+}

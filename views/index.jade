@@ -1,0 +1,32 @@
+doctype html
+html
+  link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    h1 Message Roulette
+    div.login-container
+      form#form-container( action='/api/users/login',method='post')
+        div
+          fieldset
+            label.label-container(for='email')
+              div.label-text email
+              input(id='email',type='text',value='',placeholder='@',name='email')
+        div
+          fieldset
+            label.label-container(for='password')
+              div.label-text password
+              input(id='password',type='password',value='12345678',placeholder='',name='pswd')
+        div.btn-container   
+          input.login-sign-in-btn(type='submit',value='Sign In',data-transition='fade') 
+
+    div.btn-container 
+    button.login-sign-up-btn(onclick='handleAddUser()') Sign Up 
+    script.
+      async function handleAddUser(){
+        let email = document.getElementById('email').value;
+        let pswd = document.getElementById('password').value;
+        let url = `http://localhost:3000/api/users/register`;
+        const options = {method: 'POST',headers: { 'Accept': 'application/json','Content-Type': 'application/json'},body:JSON.stringify({email,pswd})}
+        await fetch(url,options);
+        alert('Added user.')
+      }
+
