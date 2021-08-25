@@ -22,7 +22,6 @@ html
     button.login-sign-up-btn(onclick='handleAddUser()') Sign Up 
     script.
       async function handleAddUser(){
-        console.log(document.location.hostname, document.location.port);
         let email = document.getElementById('email').value;
         let pswd = document.getElementById('password').value;
         let url = `http://${document.location.hostname}:${document.location.port}/api/users/register`;
