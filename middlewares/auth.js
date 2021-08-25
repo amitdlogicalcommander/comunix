@@ -8,7 +8,6 @@ exports.register = (req,res,next) => {
   req.check('pswd','Password min 8').isLength({min:8});
   const error = req.validationErrors();
   if(error){
-    console.log('auth-register-failed')
     res.status(400).json(error);
   } else{
     req.body.pswd = bcrypt.hashSync(req.body.pswd, saltRounds);
@@ -18,7 +17,6 @@ exports.register = (req,res,next) => {
 
 exports.checkAuth = (req,res,next) => {
   try{
-    console.log('cookie=',req.cookies);
     if(!req.cookies || !req.cookies.token){
       throw new Error('missing ');
     }

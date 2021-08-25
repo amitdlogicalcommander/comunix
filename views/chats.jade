@@ -11,12 +11,12 @@ html
 
     script(src="/socket.io/socket.io.js")
     script.
-      var socket = io();
+      var socket = io('//'+document.location.hostname+':'+document.location.port);
       function isValidMsgType(type){
           return ['spin','wild','blast'].includes(type);
       }
       async function sendMsg(type){
-        let url = `http://localhost:3000/api/chats/${type}`;
+        let url = `http://${document.location.hostname}:${document.location.port}/api/chats/${type}`;
         const options = {method: 'POST'}
         if(type === 'wild'){
           options.body = {pickRandomSize: 2}

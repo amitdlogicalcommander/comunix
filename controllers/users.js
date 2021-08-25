@@ -27,8 +27,8 @@ const findUser = async (email) => {
 exports.handleRegister = async (req,res) => {
   try{
     await createUser(req.body);
-    res.render('index');
-    return res.status(200);
+    res.status(200);
+    res.json();
   } catch(error){
     return res.status(400).json({message: 'Failed to register'});
   }
@@ -45,8 +45,7 @@ exports.handleLogin = async (req,res) => {
       const isComparePass = bcrypt.compareSync(req.body.pswd, user.pswd);
       if (isComparePass){
         const token = jwt.sign({email:user.email},secret_key);
-        //res.io.emit("socketToMe", {token:token});
-        const options =  { maxAge: 1000 * 60 * 15, httpOnly: true };
+        const options =  { maxAge: 1000 * 60 * 15 };
         res.cookie('token', token, options);
         res.render('chats', { title: 'chats' });
         res.status(200);

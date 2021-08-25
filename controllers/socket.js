@@ -20,7 +20,7 @@ exports.sendMsg =  (io,pickRandomSize,msgValue) => {
     io.of('/').adapter.clients((err, clients) => {
       if(err){reject(err)};
       const randomClientsArr = _.sampleSize(clients,pickRandomSize);
-      console.log('clients=',clients,'randomClient=',randomClientsArr);
+      console.log('clients id=',clients,'randomClient=',randomClientsArr);
       for(let randomClient of randomClientsArr){
         io.to(randomClient).emit("socketToMe", msgValue);
       }

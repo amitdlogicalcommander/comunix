@@ -22,9 +22,10 @@ html
     button.login-sign-up-btn(onclick='handleAddUser()') Sign Up 
     script.
       async function handleAddUser(){
+        console.log(document.location.hostname, document.location.port);
         let email = document.getElementById('email').value;
         let pswd = document.getElementById('password').value;
-        let url = `http://localhost:3000/api/users/register`;
+        let url = `http://${document.location.hostname}:${document.location.port}/api/users/register`;
         const options = {method: 'POST',headers: { 'Accept': 'application/json','Content-Type': 'application/json'},body:JSON.stringify({email,pswd})}
         await fetch(url,options);
         alert('Added user.')
